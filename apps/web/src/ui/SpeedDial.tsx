@@ -38,7 +38,7 @@ export function SpeedDial(): React.JSX.Element {
         <circle cx="100" cy="100" r="3" fill="#ff354c" />
       </g>
       <text x="100" y="179" textAnchor="middle" fill="#a1adb7" fontSize="7" letterSpacing="2">
-        SPRINT GT
+        458 ITALIA
       </text>
     </svg>
   );

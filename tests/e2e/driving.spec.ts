@@ -76,3 +76,49 @@ test('paint selection persists and standard-quality showroom renders', async ({ 
   });
   await page.screenshot({ path: 'test-results/garage-upgrade.png' });
 });
+
+test('English coach speaks a mission and rewards the driving response', async ({ page }) => {
+  test.setTimeout(75000);
+  await page.setViewportSize({ width: 960, height: 720 });
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      'drivetalk:preferences',
+      JSON.stringify({ quality: 'low', english: true }),
+    );
+    // Deterministic browser voice double: driving and lesson progression remain real.
+    class Utterance {
+      text: string;
+      constructor(text: string) {
+        this.text = text;
+      }
+    }
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', {
+      value: Utterance,
+      configurable: true,
+    });
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        cancel() {},
+        getVoices: () => [],
+        speak(utterance: { onend?: () => void }) {
+          setTimeout(() => utterance.onend?.(), 30);
+        },
+      },
+    });
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: '자유 주행 시간 제한 없이 연습' }).click();
+  await page.getByRole('checkbox', { name: '안전한 장소에서 게임을 이용하겠습니다.' }).check();
+  await page.getByRole('button', { name: '주행 시작', exact: true }).click();
+  await expect(page.locator('.countdown')).toBeHidden({ timeout: 10000 });
+  await page.keyboard.down('w');
+  await expect(page.locator('[data-coach]')).toContainText('EN 2 / 6', { timeout: 18000 });
+  await page.keyboard.up('w');
+  await page.getByRole('button', { name: '주행 마치기' }).click();
+  await expect(page.getByText('운전으로 수행한 미션 1 / 6', { exact: false })).toBeVisible();
+  await page.getByText('Speed up.', { exact: true }).click();
+  await page.getByRole('button', { name: '뜻을 기억했어요', exact: true }).click();
+  await page.getByRole('button', { name: '복습 기록 저장', exact: true }).click();
+  await expect(page.getByRole('button', { name: '복습 기록 저장됨' })).toBeVisible();
+});

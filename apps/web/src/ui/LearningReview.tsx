@@ -10,6 +10,7 @@ export function LearningReview(): React.JSX.Element {
   const [audioError, setAudioError] = useState(false);
   const completed = learning.lesson.results.filter((r) => r.success).length;
   const remember = (id: PhraseId): void => {
+    setSaved(false);
     setAnswer((old) => ({ ...old, [id]: true }));
   };
   const save = (): void => {

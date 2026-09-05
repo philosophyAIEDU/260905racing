@@ -60,7 +60,7 @@ export function Scenery(): React.JSX.Element {
             rotation={[0, i, 0]}
             scale={[1.3, 0.8 + (i % 4) * 0.25, 1]}
           >
-            <icosahedronGeometry args={[55 + (i % 3) * 15, 1]} />
+            <icosahedronGeometry args={[55 + (i % 3) * 15, 2]} />
             <meshStandardMaterial color={i % 2 ? '#889080' : '#9b9b86'} flatShading />
           </mesh>
         );

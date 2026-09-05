@@ -70,14 +70,15 @@ export default function Scene({
           antialias: true,
           powerPreference: 'high-performance',
           toneMapping: ACESFilmicToneMapping,
+          toneMappingExposure: 0.9,
         }}
       >
         <color attach="background" args={['#b6d5e5']} />
         <fog attach="fog" args={['#b6d5e5', 170, 530]} />
-        <hemisphereLight args={['#e6f3ff', '#747353', 1.5]} />
+        <hemisphereLight args={['#ddecff', '#535841', 1.1]} />
         <directionalLight
           position={[75, 105, 70]}
-          intensity={2.7}
+          intensity={2.1}
           color="#fff0cd"
           castShadow
           shadow-mapSize={[2048, 2048]}
@@ -88,7 +89,7 @@ export default function Scene({
           shadow-camera-far={350}
           shadow-bias={-0.001}
         />
-        <Sky distance={450000} sunPosition={[75, 105, 70]} turbidity={2.5} rayleigh={0.7} />
+        <Sky distance={450000} sunPosition={[75, 105, 70]} turbidity={2.5} rayleigh={2} />
         <Suspense fallback={null}>
           <Environment frames={1} resolution={quality === 'low' ? 64 : 128}>
             <color attach="background" args={['#8faec6']} />

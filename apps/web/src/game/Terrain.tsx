@@ -21,7 +21,11 @@ export function Terrain(): React.JSX.Element {
         z = p.getZ(i),
         h = terrainHeight(x, z);
       p.setY(i, h);
-      c.setHSL(0.22 + 0.025 * Math.sin(x * 0.07), 0.34, 0.3 + 0.08 * Math.sin(x * 0.12 + z * 0.08));
+      c.setHSL(
+        0.22 + 0.025 * Math.sin(x * 0.07),
+        0.34,
+        0.12 + 0.035 * Math.sin(x * 0.12 + z * 0.08),
+      );
       colors.push(c.r, c.g, c.b);
     }
     g.setAttribute('color', new Float32BufferAttribute(colors, 3));

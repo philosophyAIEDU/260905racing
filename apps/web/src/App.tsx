@@ -79,11 +79,17 @@ export function App(): React.JSX.Element {
               <aside className="car-label">
                 <p>YOUR RIDE</p>
                 <h2>
-                  SPRINT <span>/ 01</span>
+                  458 <span>/ ITALIA</span>
                 </h2>
                 <div>
-                  <span>4-WHEEL DRIVE</span>
-                  <span>ARCADE TUNED</span>
+                  <span>LISTEN · DRIVE · LEARN</span>
+                  <a
+                    href="https://sketchfab.com/models/57bf6cc56931426e87494f554df1dab6"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    3D: vicent091036 · CC BY
+                  </a>
                 </div>
               </aside>
             )}

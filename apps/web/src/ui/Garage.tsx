@@ -89,7 +89,7 @@ export function Garage({
         role="group"
         aria-label={language === 'ko' ? '차량 색상' : 'Car paint'}
       >
-        <span>SPRINT GT</span>
+        <span>458 ITALIA</span>
         {(['#d71932', '#10141a', '#edf2f4'] as const).map((value, i) => (
           <button
             key={value}
