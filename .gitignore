@@ -9,3 +9,6 @@ playwright-report/
 test-results/
 *.tsbuildinfo
 .DS_Store
+
+apps/web/public/models/ferrari.glb
+apps/web/public/models/draco/

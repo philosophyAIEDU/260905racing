@@ -17,7 +17,10 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "assets": "node tools/fetch-car.mjs",
+    "prebuild": "pnpm assets",
+    "predev": "pnpm assets"
   },
   "devDependencies": {
     "@eslint/js": "9.22.0",

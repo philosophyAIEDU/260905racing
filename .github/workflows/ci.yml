@@ -27,7 +27,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: drivetalk-web
-          path: apps/web/dist
+          path: |
+            apps/web/dist
+            apps/web/public/models
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
       - uses: actions/upload-artifact@v4
