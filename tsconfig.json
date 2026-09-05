@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "types": ["vite/client", "node"],
+    "paths": {
+      "@drivetalk/game-core": ["packages/game-core/src/index.ts"],
+      "@drivetalk/schema": ["packages/schema/src/index.ts"],
+      "@drivetalk/ui": ["packages/ui/src/index.ts"]
+    }
+  },
+  "include": ["apps", "packages", "tests", "*.ts"]
+}

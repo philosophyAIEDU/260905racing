@@ -1,0 +1,242 @@
+.lap-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.lap-counter > span,
+.race-time > span {
+  font-size: 12px;
+  color: #dfebd8;
+  letter-spacing: 2px;
+}
+.lap-counter > strong {
+  font:
+    italic 800 46px Arial,
+    sans-serif;
+  line-height: 1;
+}
+.lap-counter small {
+  font-size: 17px;
+  color: #d4dfcc;
+}
+.race-time {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.race-time > strong {
+  font:
+    500 30px Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+}
+.hud-buttons {
+  position: absolute;
+  right: 42px;
+  top: 22px;
+  display: flex;
+  gap: 10px;
+}
+.hud-buttons .icon-button {
+  background: #17292ab3;
+}
+.hud-map {
+  position: absolute;
+  left: 40px;
+  bottom: 42px;
+  background: #162628b3;
+  border: 1px solid #d3e1c629;
+  border-radius: 8px;
+  padding: 12px 20px 16px;
+  backdrop-filter: blur(8px);
+}
+.hud-map > .minimap {
+  width: 165px;
+  height: 130px;
+}
+.hud-map > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  font-size: 12px;
+  color: #d2dfc7;
+}
+.hud-map > div strong {
+  font:
+    700 16px Arial,
+    sans-serif;
+  color: var(--lime);
+}
+.speed-panel {
+  position: absolute;
+  right: 45px;
+  bottom: 56px;
+  width: 250px;
+}
+.speed-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.speed-row > strong {
+  font:
+    italic 700 85px Arial,
+    sans-serif;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -5px;
+}
+.speed-row > span {
+  font:
+    13px Arial,
+    sans-serif;
+  color: #e5edda;
+}
+.gear {
+  font:
+    700 22px Arial,
+    sans-serif;
+  color: var(--lime);
+  width: 32px;
+  letter-spacing: 0;
+}
+.speed-meter {
+  height: 5px;
+  background: #f1f8d32b;
+  margin-top: 15px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.speed-meter i {
+  display: block;
+  background: var(--lime);
+  height: 100%;
+  width: 0;
+  transition: width 0.1s linear;
+}
+.drift-stat {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-bottom: 18px;
+  font:
+    12px Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  color: #d1ddc7;
+}
+.drift-stat > strong {
+  font-size: 22px;
+  color: var(--lime);
+}
+.drift-stat > small {
+  font-size: 12px;
+}
+.driving-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+  color: #e1e9d8;
+}
+.drive-signal {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 3px;
+  background: #173531c4;
+  border-bottom: 2px solid var(--lime);
+  color: var(--lime);
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.drive-signal[data-active='true'] {
+  opacity: 1;
+}
+.countdown {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0 3px 25px #0006);
+}
+.countdown > span {
+  font-size: 16px;
+  letter-spacing: 5px;
+}
+.countdown > strong {
+  font:
+    italic 900 140px Arial,
+    sans-serif;
+  color: var(--lime);
+  line-height: 1.15;
+}
+.end-practice {
+  position: absolute;
+  top: 90px;
+  right: 42px;
+  background: #17292acc;
+  border: 1px solid #cbdcbc5c;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 13px;
+}
+.touch-controls {
+  display: none;
+}
+.scrim {
+  position: absolute;
+  inset: 100px 0 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #12222777;
+  backdrop-filter: blur(6px);
+  overflow: auto;
+  padding: 25px;
+}
+.pause-panel {
+  width: 420px;
+  background: #172629;
+  border: 1px solid #d8e5bc30;
+  padding: 37px;
+  border-radius: 10px;
+}
+.pause-panel > svg {
+  color: var(--lime);
+  margin-bottom: 23px;
+}
+.pause-panel h2 {
+  font-size: 27px;
+  margin-top: 12px;
+  letter-spacing: -1px;
+}
+.pause-panel > p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #bdcbbb;
+  margin: 15px 0 28px;
+}
+.secondary {
+  width: 100%;
+  padding: 14px;
+  background: #ffffff0c;
+  border: 1px solid #dce7c735;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 15px;
+}

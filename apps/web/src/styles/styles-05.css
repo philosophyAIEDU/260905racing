@@ -1,0 +1,39 @@
+@media (max-width: 1000px) {
+  .header-center {
+    display: none;
+  }
+  .garage-panel {
+    margin-left: 35px;
+    width: 410px;
+  }
+  .garage-panel h1 {
+    font-size: 86px;
+  }
+  .car-label {
+    right: 34px;
+  }
+  .app-header {
+    margin: 0 28px;
+  }
+  .garage-footer {
+    left: 28px;
+    right: 28px;
+  }
+  .garage-footer > span:last-child {
+    display: none;
+  }
+  .course-card,
+  .mode-switch,
+  .start-button {
+    max-width: 410px;
+  }
+  .course-stats {
+    gap: 12px 20px;
+  }
+  .speed-panel {
+    right: 30px;
+  }
+  .driving-hint {
+    display: none;
+  }
+}

@@ -1,0 +1,245 @@
+@media (max-width: 650px) {
+  .game-shell {
+    min-height: 900px;
+    height: 100dvh;
+    overflow: auto;
+  }
+  .game-shell.is-driving {
+    min-height: 420px;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .app-header {
+    height: 73px;
+    margin: 0 20px;
+  }
+  .wordmark {
+    font-size: 23px;
+  }
+  .wordmark i {
+    font-size: 12px;
+    margin-left: 9px;
+  }
+  .header-actions {
+    gap: 13px;
+  }
+  .language-button {
+    font-size: 12px;
+  }
+  .icon-button {
+    width: 37px;
+    height: 37px;
+  }
+  .garage-panel {
+    margin: 32px 24px 0;
+    width: calc(100% - 48px);
+  }
+  .garage-panel h1 {
+    font-size: 74px;
+    line-height: 0.92;
+    letter-spacing: -4px;
+    margin-top: 22px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .course-subtitle {
+    max-width: 330px;
+    font-size: 14px;
+  }
+  .vignette {
+    background:
+      linear-gradient(90deg, #0b181bec 0%, #0d1a1cea 40%, #0d1a1c91),
+      linear-gradient(0deg, #0d1a1c, transparent);
+  }
+  .course-card {
+    margin-top: 21px;
+    max-width: none;
+  }
+  .minimap {
+    width: 145px;
+  }
+  .mode-switch {
+    max-width: none;
+    margin-top: 20px;
+  }
+  .mode-switch button {
+    padding: 13px 10px;
+    gap: 8px;
+  }
+  .mode-switch small {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .mode-switch strong {
+    font-size: 14px;
+  }
+  .mode-switch button > svg:last-child:not(:first-child) {
+    display: none;
+  }
+  .safety {
+    margin: 24px 0 18px;
+  }
+  .safety > strong {
+    font-size: 13px;
+  }
+  .safety label {
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .start-button {
+    max-width: none;
+    min-height: 58px;
+  }
+  .car-label {
+    display: none;
+  }
+  .garage-footer {
+    left: 24px;
+    right: 24px;
+    height: 65px;
+    font-size: 12px;
+  }
+  .garage-footer > span:first-child {
+    gap: 7px;
+  }
+  .garage-footer kbd {
+    font-size: 12px;
+  }
+  .footer-dot {
+    margin: 0 1px;
+  }
+  .hud,
+  .scrim {
+    top: 73px;
+  }
+  .race-top {
+    top: 18px;
+    left: 20px;
+    gap: 22px;
+  }
+  .lap-counter {
+    gap: 5px;
+  }
+  .lap-counter > strong {
+    font-size: 33px;
+  }
+  .lap-counter > span,
+  .race-time > span {
+    font-size: 12px;
+  }
+  .lap-counter small {
+    font-size: 14px;
+  }
+  .race-time > strong {
+    font-size: 23px;
+  }
+  .hud-buttons {
+    right: 17px;
+    top: 15px;
+    gap: 6px;
+  }
+  .hud-map {
+    left: 18px;
+    bottom: 190px;
+    padding: 3px 8px 9px;
+  }
+  .hud-map > .minimap {
+    width: 105px;
+    height: 82px;
+  }
+  .hud-map > div {
+    font-size: 12px;
+    gap: 10px;
+  }
+  .hud-map > div strong {
+    font-size: 12px;
+  }
+  .speed-panel {
+    right: 23px;
+    bottom: 205px;
+    width: 164px;
+  }
+  .speed-row {
+    gap: 6px;
+  }
+  .speed-row > strong {
+    font-size: 55px;
+    letter-spacing: -3px;
+  }
+  .speed-row > span {
+    font-size: 12px;
+  }
+  .gear {
+    font-size: 17px;
+    width: 20px;
+  }
+  .drift-stat {
+    margin-bottom: 11px;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .drift-stat > strong {
+    font-size: 18px;
+  }
+  .end-practice {
+    top: 75px;
+    right: 20px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .drive-signal {
+    font-size: 12px;
+    top: 19%;
+    width: max-content;
+    max-width: 90%;
+    letter-spacing: 1px;
+  }
+  .countdown > strong {
+    font-size: 100px;
+  }
+  .scrim {
+    padding: 20px;
+  }
+  .pause-panel {
+    padding: 25px;
+    width: 100%;
+  }
+  .pause-panel h2 {
+    font-size: 25px;
+  }
+  .settings-dialog {
+    padding: 23px;
+  }
+  .setting-row {
+    gap: 15px;
+  }
+  .setting-row strong {
+    font-size: 14px;
+  }
+  .control-grid {
+    gap: 15px 9px;
+  }
+  .control-grid > span {
+    font-size: 12px;
+    gap: 7px;
+  }
+  .control-grid kbd {
+    padding: 4px;
+    font-size: 12px;
+  }
+  .results-panel {
+    padding: 25px;
+  }
+  .results-panel h2 {
+    font-size: 25px;
+  }
+  .result-stats strong {
+    font-size: 23px;
+  }
+  .result-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
