@@ -1,3 +1,4 @@
+import { LearningSetup } from './LearningSetup';
 import { useState } from 'react';
 import { formatTime, TRACK_LENGTH } from '@drivetalk/game-core';
 import { Icon } from '@drivetalk/ui';
@@ -103,6 +104,7 @@ export function Garage({
           />
         ))}
       </div>
+      <LearningSetup />
       <div className="safety">
         <strong>
           <Icon name="shield" size={16} />

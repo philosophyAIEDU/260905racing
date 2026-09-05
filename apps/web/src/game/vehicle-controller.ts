@@ -75,7 +75,8 @@ export function driveVehicle(
   const braking = reverse ? 0 : input.brake * c.brakeImpulse;
   s.steer = approach(
     s.steer,
-    input.steer * steeringLimit(s.forward, c.maxSteer, assists),
+    // The camera looks along +Z: screen-right is local -X (negative yaw).
+    -input.steer * steeringLimit(s.forward, c.maxSteer, assists),
     c.steerSpeed * FIXED_STEP,
   );
   s.slip = slipAngle(s.forward, s.sideways);

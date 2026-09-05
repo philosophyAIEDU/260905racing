@@ -1,3 +1,5 @@
+import { createLesson, learning } from '../learning/lesson';
+import { speakEnglish } from '../learning/speech';
 import { create } from 'zustand';
 import { createRace, trackPoint, type RaceState } from '@drivetalk/game-core';
 import { preferencesSchema, recordSchema, type Preferences } from '@drivetalk/schema';
@@ -84,6 +86,11 @@ export const useGame = create<GameStore>((set, get) => ({
   guardBlocked: false,
   start(practice) {
     clearInput();
+    learning.lesson = createLesson();
+    learning.active = get().preferences.english;
+    learning.audioReady = false;
+    learning.audioError = false;
+    if (learning.active) speakEnglish('Ready. Listen and drive.');
     telemetry.race = createRace(practice ? 0 : 3);
     telemetry.speed = 0;
     telemetry.rpm = 900;

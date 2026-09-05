@@ -29,6 +29,7 @@ export const vehicleSchema = z.object({
 export type VehicleConfig = z.infer<typeof vehicleSchema>;
 
 export const preferencesSchema = z.object({
+  english: z.boolean().default(true),
   language: z.enum(['ko', 'en']).default('ko'),
   assists: z.boolean().default(true),
   reducedMotion: z.boolean().default(false),

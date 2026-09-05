@@ -1,3 +1,4 @@
+import { LearningReview } from './LearningReview';
 import { formatTime } from '@drivetalk/game-core';
 import { Icon } from '@drivetalk/ui';
 import { telemetry, useGame } from '../state/game-store';
@@ -46,6 +47,7 @@ export function Results(): React.JSX.Element {
             {t('penalty')} <strong>+{race.penalty}s</strong>
           </span>
         </div>
+        <LearningReview />
         <button className="primary" onClick={garage}>
           {t('return')}
           <Icon name="arrow" />

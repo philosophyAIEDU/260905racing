@@ -3,6 +3,8 @@ import { formatTime } from '@drivetalk/game-core';
 import { Icon } from '@drivetalk/ui';
 import { telemetry, useGame } from '../state/game-store';
 import { TouchControls } from '../input/TouchControls';
+import { learning, PHRASES } from '../learning/lesson';
+import { replayInstruction } from '../learning/useLearning';
 import { SpeedDial } from './SpeedDial';
 import { Minimap } from './Minimap';
 import { useText } from './i18n';
@@ -20,6 +22,7 @@ export function Hud(): React.JSX.Element {
     const container = root.current;
     if (!container) return;
     const speed = container.querySelector('[data-speed]');
+    const coach = container.querySelector('[data-coach]');
     const needle = container.querySelector('[data-needle]');
     const gear = container.querySelector('[data-gear]');
     const lap = container.querySelector('[data-lap]');
@@ -29,6 +32,10 @@ export function Hud(): React.JSX.Element {
     const signal = container.querySelector<HTMLElement>('[data-signal]');
     const meter = container.querySelector<HTMLElement>('[data-meter]');
     const id = window.setInterval(() => {
+      if (coach)
+        coach.textContent = learning.audioError
+          ? 'EN ↻'
+          : `EN ${Math.min(learning.lesson.index + 1, PHRASES.length)} / 6 ${learning.lesson.index === PHRASES.length ? '✓' : '♪'}`;
       if (speed) speed.textContent = Math.round(telemetry.speed).toString().padStart(3, '0');
       needle?.setAttribute(
         'transform',
@@ -106,6 +113,16 @@ export function Hud(): React.JSX.Element {
           <span>{t('ready')}</span>
           <strong ref={countdown}>{Math.ceil(telemetry.countdown)}</strong>
         </div>
+      )}
+      {learning.active && (
+        <button
+          className="coach-radio"
+          onClick={replayInstruction}
+          aria-label={language === 'ko' ? '영어 지시 다시 듣기' : 'Repeat English instruction'}
+        >
+          <span data-coach>EN ♪</span>
+          <small>↻</small>
+        </button>
       )}
       <div className="hud-map">
         <Minimap live />

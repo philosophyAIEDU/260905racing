@@ -1,0 +1,135 @@
+.learning-setup {
+  max-width: 440px;
+  margin: 14px 0;
+  padding: 12px 14px;
+  border: 1px solid #b3d7e230;
+  border-radius: 8px;
+  background: #102029b3;
+}
+.learning-setup label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+}
+.learning-setup label small {
+  margin-left: auto;
+  color: #c8ea8b;
+}
+.learning-setup p,
+.learning-setup > small {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c2d0d5;
+  margin: 9px 0;
+  display: block;
+}
+.audio-check,
+.learning-review button {
+  padding: 7px 11px;
+  background: #ffffff12;
+  border: 1px solid #ffffff36;
+  border-radius: 5px;
+  color: #eff4f7;
+  font-size: 12px;
+}
+.learning-setup details {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.learning-setup summary,
+.learning-review summary {
+  cursor: pointer;
+}
+.learning-setup b {
+  display: inline-block;
+  min-width: 145px;
+  color: #fff;
+}
+.coach-radio {
+  pointer-events: auto;
+  position: absolute;
+  top: 110px;
+  left: 42px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #122433df;
+  border: 1px solid #87dbe777;
+  border-radius: 25px;
+  padding: 12px 18px;
+  color: #e9f5f9;
+  font-size: 13px;
+}
+.coach-radio small {
+  font-size: 20px;
+}
+.results-panel {
+  max-height: calc(100dvh - 100px);
+  overflow: auto;
+}
+.learning-review {
+  margin: 20px 0;
+  text-align: left;
+  border-top: 1px solid #ffffff30;
+  padding-top: 18px;
+}
+.learning-review h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.learning-review > p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #b6cbd1;
+}
+.review-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.review-cards details {
+  padding: 11px;
+  border: 1px solid #c6deeb30;
+  border-radius: 6px;
+}
+.review-cards summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+.review-cards p {
+  font-size: 13px;
+  margin: 10px 0;
+}
+.review-cards .review-hint {
+  color: #b2c4cb;
+  font-size: 11px;
+}
+.review-cards button {
+  margin: 3px 5px 0 0;
+  font-size: 11px;
+}
+.review-cards button[aria-pressed='true'] {
+  border-color: #c8ea8b;
+  color: #c8ea8b;
+}
+@media (max-width: 600px) {
+  .coach-radio {
+    top: 100px;
+    left: 18px;
+    padding: 8px 12px;
+  }
+  .review-cards {
+    grid-template-columns: 1fr;
+  }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  .coach-radio {
+    top: 82px;
+    left: 25px;
+    padding: 6px 10px;
+  }
+}

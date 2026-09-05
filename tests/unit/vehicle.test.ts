@@ -89,9 +89,18 @@ describe('real Rapier raycast vehicle', () => {
     const turn = setup();
     for (let i = 0; i < 130; i++) tick(turn, 1);
     for (let i = 0; i < 90; i++) tick(turn, 0.35, 0, 1);
-    expect(turn.body.translation().x).toBeGreaterThan(1);
+    expect(turn.body.translation().x).toBeLessThan(-1);
     expect(turn.body.translation().y).toBeGreaterThan(0.25);
     turn.world.free();
+  });
+  it('maps left input to camera-left and right input to camera-right', () => {
+    for (const steer of [-1, 1]) {
+      const car = setup();
+      for (let i = 0; i < 130; i++) tick(car, 1);
+      for (let i = 0; i < 70; i++) tick(car, 0.35, 0, steer);
+      expect(car.body.translation().x * -steer).toBeGreaterThan(1);
+      car.world.free();
+    }
   });
   it('releases rear lateral grip for a handbrake drift', () => {
     const car = setup();

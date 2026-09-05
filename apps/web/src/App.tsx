@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { Icon } from '@drivetalk/ui';
 import { useGame } from './state/game-store';
+import { useLearning } from './learning/useLearning';
 import { useControls } from './input/controls';
 import { useMovementGuard } from './input/use-movement-guard';
 import { Garage } from './ui/Garage';
@@ -27,6 +28,7 @@ export function App(): React.JSX.Element {
   const guardMessage = useMovementGuard();
   const t = useText();
   useControls();
+  useLearning();
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
