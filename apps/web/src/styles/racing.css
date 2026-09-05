@@ -1,0 +1,149 @@
+/* Reference-inspired motorsport instrumentation, with touch-safe placement. */
+.paint-picker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 18px;
+}
+.paint-picker > span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-right: 8px;
+  color: #dae2e5;
+}
+.paint-picker button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ffffff70;
+  box-shadow:
+    inset 0 2px 4px #ffffff70,
+    inset 0 -4px 6px #0005;
+}
+.paint-picker button[aria-pressed='true'] {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+.speed-panel {
+  width: 224px;
+  height: 224px;
+  bottom: 35px;
+  filter: drop-shadow(0 6px 16px #0005);
+}
+.speed-dial {
+  width: 100%;
+  height: 100%;
+  color: #dce9ed;
+}
+.speed-dial .redline {
+  color: #ff5a62;
+}
+.speed-row {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  width: 100%;
+  justify-content: center;
+  gap: 5px;
+  align-items: baseline;
+}
+.speed-row > strong {
+  font-size: 36px;
+  letter-spacing: -1px;
+}
+.speed-row > span {
+  font-size: 10px;
+  color: #abbcc7;
+}
+.speed-row .gear {
+  width: 18px;
+  font-size: 16px;
+  color: #ff6674;
+}
+.speed-meter {
+  position: absolute;
+  bottom: 17%;
+  left: 32%;
+  width: 36%;
+  height: 3px;
+  margin: 0;
+}
+.speed-meter i {
+  background: #ff354c;
+}
+.drift-stat {
+  position: absolute;
+  top: -26px;
+  width: 100%;
+  justify-content: center;
+  margin: 0;
+  text-shadow: 0 1px 5px #000;
+}
+.drift-stat > strong {
+  color: #fff;
+}
+.hud-map,
+.hud-buttons .icon-button {
+  background: #111c29cc;
+  border-color: #dfe9f240;
+}
+.race-top {
+  padding: 14px 20px;
+  background: linear-gradient(115deg, #101923d9, #10192390);
+  border-left: 3px solid #ff354c;
+  border-radius: 3px 12px 12px 3px;
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 600px) {
+  .speed-panel {
+    width: 160px;
+    height: 160px;
+    right: 16px;
+    bottom: 35px;
+  }
+  .speed-row > strong {
+    font-size: 27px;
+  }
+  .speed-row > span {
+    font-size: 8px;
+  }
+  .speed-row .gear {
+    font-size: 12px;
+  }
+  .race-top {
+    padding: 10px 12px;
+  }
+}
+@media (pointer: coarse) {
+  .speed-panel {
+    bottom: 170px;
+  }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  .speed-panel {
+    width: 142px;
+    height: 142px;
+    right: 205px;
+    bottom: 18px;
+  }
+  .speed-row > strong {
+    font-size: 25px;
+  }
+  .speed-row > span {
+    font-size: 8px;
+  }
+  .speed-row .gear {
+    font-size: 12px;
+  }
+  .drift-stat {
+    top: -17px;
+    font-size: 9px;
+    gap: 5px;
+  }
+  .drift-stat > strong {
+    font-size: 14px;
+  }
+  .race-top {
+    padding: 8px 12px;
+  }
+}

@@ -31,9 +31,9 @@ export function FollowCamera({ target }: { target: RefObject<Group | null> }): n
     const garage = phase === 'garage' || phase === 'finished';
     const hood = preferences.camera === 'hood' && !garage;
     temp.desired.copy(temp.position);
-    if (garage) temp.desired.addScaledVector(temp.forward, 7.6).addScaledVector(temp.right, 8.7);
-    else temp.desired.addScaledVector(temp.forward, hood ? 1.15 : -7.5 - telemetry.speed * 0.017);
-    temp.desired.y += garage ? 4.2 : hood ? 1.1 : 3.7;
+    if (garage) temp.desired.addScaledVector(temp.forward, 6.8).addScaledVector(temp.right, 7.5);
+    else temp.desired.addScaledVector(temp.forward, hood ? 1.15 : -6.5 - telemetry.speed * 0.014);
+    temp.desired.y += garage ? 2.8 : hood ? 1.1 : 2.65;
     temp.look
       .copy(temp.position)
       .addScaledVector(temp.forward, garage ? 0 : hood ? 25 : 5 + telemetry.speed * 0.025);

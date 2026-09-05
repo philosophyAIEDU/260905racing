@@ -18,6 +18,9 @@ export function Garage({
   const bestLap = useGame((s) => s.bestLap);
   const blocked = useGame((s) => s.guardBlocked);
   const t = useText();
+  const color = useGame((s) => s.preferences.color);
+  const language = useGame((s) => s.preferences.language);
+  const paint = useGame((s) => s.setPreferences);
   return (
     <section className="garage-panel" aria-labelledby="course-title">
       <p className="eyebrow">
@@ -79,6 +82,26 @@ export function Garage({
           </span>
           {practice && <Icon name="check" size={16} />}
         </button>
+      </div>
+      <div
+        className="paint-picker"
+        role="group"
+        aria-label={language === 'ko' ? '차량 색상' : 'Car paint'}
+      >
+        <span>SPRINT GT</span>
+        {(['#d71932', '#10141a', '#edf2f4'] as const).map((value, i) => (
+          <button
+            key={value}
+            style={{ backgroundColor: value }}
+            aria-pressed={color === value}
+            aria-label={
+              (language === 'ko'
+                ? ['레이싱 레드', '카본 블랙', '펄 화이트']
+                : ['Racing red', 'Carbon black', 'Pearl white'])[i]
+            }
+            onClick={() => paint({ color: value })}
+          />
+        ))}
       </div>
       <div className="safety">
         <strong>

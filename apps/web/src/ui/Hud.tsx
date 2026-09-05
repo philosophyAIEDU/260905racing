@@ -3,6 +3,7 @@ import { formatTime } from '@drivetalk/game-core';
 import { Icon } from '@drivetalk/ui';
 import { telemetry, useGame } from '../state/game-store';
 import { TouchControls } from '../input/TouchControls';
+import { SpeedDial } from './SpeedDial';
 import { Minimap } from './Minimap';
 import { useText } from './i18n';
 
@@ -19,6 +20,7 @@ export function Hud(): React.JSX.Element {
     const container = root.current;
     if (!container) return;
     const speed = container.querySelector('[data-speed]');
+    const needle = container.querySelector('[data-needle]');
     const gear = container.querySelector('[data-gear]');
     const lap = container.querySelector('[data-lap]');
     const time = container.querySelector('[data-time]');
@@ -28,6 +30,10 @@ export function Hud(): React.JSX.Element {
     const meter = container.querySelector<HTMLElement>('[data-meter]');
     const id = window.setInterval(() => {
       if (speed) speed.textContent = Math.round(telemetry.speed).toString().padStart(3, '0');
+      needle?.setAttribute(
+        'transform',
+        `rotate(${-130 + Math.min(1, telemetry.speed / 180) * 260} 100 100)`,
+      );
       if (gear) gear.textContent = telemetry.gear;
       if (lap) lap.textContent = String(telemetry.race.lap).padStart(2, '0');
       if (time) time.textContent = formatTime(telemetry.race.elapsed);
@@ -109,6 +115,7 @@ export function Hud(): React.JSX.Element {
         </div>
       </div>
       <div className="speed-panel">
+        <SpeedDial />
         <div className="drift-stat">
           <span>DRIFT</span>
           <strong data-score>0</strong>

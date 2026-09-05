@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
+import { Environment, Lightformer, Sky } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import { ACESFilmicToneMapping } from 'three';
@@ -71,9 +72,9 @@ export default function Scene({
           toneMapping: ACESFilmicToneMapping,
         }}
       >
-        <color attach="background" args={['#bacdc6']} />
-        <fog attach="fog" args={['#bacdc6', 125, 440]} />
-        <hemisphereLight args={['#e3efe0', '#53695c', 2.3]} />
+        <color attach="background" args={['#b6d5e5']} />
+        <fog attach="fog" args={['#b6d5e5', 170, 530]} />
+        <hemisphereLight args={['#e6f3ff', '#747353', 1.5]} />
         <directionalLight
           position={[75, 105, 70]}
           intensity={2.7}
@@ -87,7 +88,29 @@ export default function Scene({
           shadow-camera-far={350}
           shadow-bias={-0.001}
         />
+        <Sky distance={450000} sunPosition={[75, 105, 70]} turbidity={2.5} rayleigh={0.7} />
         <Suspense fallback={null}>
+          <Environment frames={1} resolution={quality === 'low' ? 64 : 128}>
+            <color attach="background" args={['#8faec6']} />
+            <Lightformer
+              position={[0, 8, 0]}
+              rotation={[Math.PI / 2, 0, 0]}
+              scale={[20, 20, 1]}
+              intensity={2}
+            />
+            <Lightformer
+              position={[5, 3, 0]}
+              rotation={[0, -Math.PI / 2, 0]}
+              scale={[12, 2, 1]}
+              intensity={3}
+            />
+            <Lightformer
+              position={[-5, 3, 0]}
+              rotation={[0, Math.PI / 2, 0]}
+              scale={[12, 2, 1]}
+              intensity={2}
+            />
+          </Environment>
           <Physics
             timeStep={1 / 60}
             interpolate

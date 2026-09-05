@@ -8,6 +8,21 @@ test('safety consent, physical driving, pause, results and fresh consent', async
   await expect(page.getByRole('button', { name: '주행 시작', exact: true })).toBeDisabled({
     timeout: 20000,
   });
+  await page.getByRole('button', { name: '카본 블랙', exact: true }).click();
+  await expect(page.getByRole('button', { name: '카본 블랙', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.reload();
+  await expect(page.getByRole('button', { name: '카본 블랙', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.getByRole('button', { name: '레이싱 레드', exact: true }).click();
+  await expect(page.getByRole('button', { name: '주행 시작', exact: true })).toBeVisible({
+    timeout: 20000,
+  });
+  await page.screenshot({ path: 'test-results/garage-upgrade.png' });
   await page.getByRole('button', { name: '자유 주행 시간 제한 없이 연습' }).click();
   await page.getByRole('checkbox', { name: '안전한 장소에서 게임을 이용하겠습니다.' }).check();
   await page.getByRole('button', { name: '주행 시작', exact: true }).click();
@@ -16,6 +31,11 @@ test('safety consent, physical driving, pause, results and fresh consent', async
   await expect
     .poll(async () => Number(await page.locator('[data-speed]').textContent()), { timeout: 7000 })
     .toBeGreaterThan(15);
+  await expect(page.locator('[data-needle]')).not.toHaveAttribute(
+    'transform',
+    'rotate(-130 100 100)',
+  );
+  await page.screenshot({ path: 'test-results/driving-upgrade.png' });
   await page.keyboard.up('w');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('heading', { name: '잠시 쉬어가세요.' })).toBeVisible();

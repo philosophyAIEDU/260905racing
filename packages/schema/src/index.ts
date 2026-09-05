@@ -33,7 +33,9 @@ export const preferencesSchema = z.object({
   assists: z.boolean().default(true),
   reducedMotion: z.boolean().default(false),
   camera: z.enum(['chase', 'hood']).default('chase'),
-  color: z.enum(['#e5fa62', '#ff7047', '#77bfe5']).default('#e5fa62'),
+  color: z
+    .enum(['#d71932', '#10141a', '#edf2f4', '#e5fa62', '#ff7047', '#77bfe5'])
+    .default('#d71932'),
   quality: z.enum(['standard', 'low']).default('standard'),
   tilt: z.boolean().default(false),
   movementGuard: z.boolean().default(false),

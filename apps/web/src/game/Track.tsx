@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import { BufferAttribute, BufferGeometry, Color, InstancedMesh, Object3D } from 'three';
+import { asphaltTexture } from './surface-textures';
 import { GATES, ROAD_WIDTH, TRACK_POINTS, TRACK_SEGMENTS, trackPoint } from '@drivetalk/game-core';
 
 function ribbon(width: number): BufferGeometry {
@@ -26,6 +27,18 @@ function ribbon(width: number): BufferGeometry {
   }
   const geometry = new BufferGeometry();
   geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setAttribute(
+    'uv',
+    new BufferAttribute(
+      new Float32Array(
+        Array.from({ length: positions.length / 3 }, (_, i) => [
+          positions[i * 3]! / 6,
+          positions[i * 3 + 2]! / 6,
+        ]).flat(),
+      ),
+      2,
+    ),
+  );
   geometry.setIndex(indices);
   geometry.computeVertexNormals();
   return geometry;
@@ -51,7 +64,7 @@ function Barriers(): React.JSX.Element {
         object.scale.set(0.35, 1.15, p.length);
         object.updateMatrix();
         mesh.current!.setMatrixAt(i * 2 + k, object.matrix);
-        mesh.current!.setColorAt(i * 2 + k, color.set(i % 12 < 3 ? '#dceba7' : '#667778'));
+        mesh.current!.setColorAt(i * 2 + k, color.set(i % 4 < 2 ? '#f0eee6' : '#c52a34'));
       });
     });
     mesh.current.instanceMatrix.needsUpdate = true;
@@ -98,7 +111,7 @@ function Markings(): React.JSX.Element {
         object.scale.set(0.85, 0.035, length * 1.1);
         object.updateMatrix();
         curb.current!.setMatrixAt(i * 2 + k, object.matrix);
-        curb.current!.setColorAt(i * 2 + k, color.set(i % 4 < 2 ? '#eee9d6' : '#d47050'));
+        curb.current!.setColorAt(i * 2 + k, color.set(i % 4 < 2 ? '#eee9d6' : '#ce3039'));
       });
       if (i % 4 === 0) {
         object.position.set(p.x, 0.045, p.z);
@@ -175,6 +188,7 @@ function CheckpointArches(): React.JSX.Element {
 }
 
 export function Track(): React.JSX.Element {
+  const asphalt = useMemo(asphaltTexture, []);
   const road = useMemo(() => ribbon(ROAD_WIDTH), []);
   const shoulder = useMemo(() => ribbon(18.7), []);
   return (
@@ -184,13 +198,13 @@ export function Track(): React.JSX.Element {
       </RigidBody>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]} receiveShadow>
         <planeGeometry args={[1000, 1000]} />
-        <meshStandardMaterial color="#819b84" roughness={1} />
+        <meshStandardMaterial color="#65804a" roughness={1} />
       </mesh>
       <mesh geometry={shoulder} position={[0, 0.005, 0]} receiveShadow>
         <meshStandardMaterial color="#baa990" roughness={1} />
       </mesh>
       <mesh geometry={road} position={[0, 0.02, 0]} receiveShadow>
-        <meshStandardMaterial color="#38474a" roughness={0.95} />
+        <meshStandardMaterial map={asphalt} bumpMap={asphalt} bumpScale={0.025} roughness={0.87} />
       </mesh>
       <Markings />
       <Barriers />
