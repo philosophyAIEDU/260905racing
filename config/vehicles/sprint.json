@@ -7,7 +7,7 @@
   "reverseSpeed": 9,
   "maxSteer": 0.5,
   "steerSpeed": 3.2,
-  "wheelRadius": 0.36,
+  "wheelRadius": 0.34,
   "suspensionRest": 0.42,
   "suspensionStiffness": 32,
   "suspensionCompression": 4.4,

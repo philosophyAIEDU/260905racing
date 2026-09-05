@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Environment, Lightformer, Sky } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import { ACESFilmicToneMapping } from 'three';
 import { useGame } from '../state/game-store';
@@ -9,9 +9,17 @@ import { Track } from './Track';
 import { Scenery } from './Scenery';
 
 function Ready({ onReady }: { onReady: () => void }): null {
+  const { gl, scene, camera } = useThree();
   useEffect(() => {
-    onReady();
-  }, [onReady]);
+    let active = true;
+    // Finish shader preparation before enabling the start button.
+    void gl.compileAsync(scene, camera).then(() => {
+      if (active) onReady();
+    });
+    return () => {
+      active = false;
+    };
+  }, [onReady, gl, scene, camera]);
   return null;
 }
 

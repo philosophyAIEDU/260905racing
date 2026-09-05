@@ -1,47 +1,31 @@
-import { forwardRef, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, type RefObject } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { Group, Mesh, MeshStandardMaterial } from 'three';
+import { useFrame } from '@react-three/fiber';
+import type { DynamicRayCastVehicleController } from '@dimforge/rapier3d-compat';
 import { prepareCar } from './real-car';
-
-const URL = '/models/ferrari.glb';
-const DECODER = '/models/draco/';
-export function CarModel({ color }: { color: string }): React.JSX.Element {
-  const { scene } = useGLTF(URL, DECODER);
-  const body = useMemo(() => {
-    const copy = prepareCar(scene).body.clone(true);
-    copy.traverse((node) => {
-      if (
-        node instanceof Mesh &&
-        node.name === 'body' &&
-        node.material instanceof MeshStandardMaterial
-      )
-        node.material = node.material.clone();
-    });
-    return copy;
-  }, [scene]);
+export function CarModel({
+  color,
+  controller,
+}: {
+  color: string;
+  controller: RefObject<DynamicRayCastVehicleController | null>;
+}): React.JSX.Element {
+  const { scene } = useGLTF('/models/ferrari.glb', '/models/draco/');
+  const car = useMemo(() => prepareCar(scene), [scene]);
   useEffect(() => {
-    body.traverse((node) => {
-      if (
-        node instanceof Mesh &&
-        node.name === 'body' &&
-        node.material instanceof MeshStandardMaterial
-      )
-        node.material.color.set(color);
-    });
-  }, [body, color]);
-  return <primitive object={body} dispose={null} />;
+    car.paint.color.set(color);
+  }, [car, color]);
+  useFrame(() => {
+    const physical = controller.current;
+    if (!physical) return;
+    for (let i = 0; i < 4; i++) {
+      const wheel = car.wheels[i]!;
+      wheel.position.y =
+        car.wheelY[i]! + (0.42 - (physical.wheelSuspensionLength(i) ?? 0.42)) / car.scale;
+      wheel.rotation.order = 'YXZ';
+      wheel.rotation.x = -Math.PI / 2 - (physical.wheelRotation(i) ?? 0);
+      wheel.rotation.y = physical.wheelSteering(i) ?? 0;
+    }
+  });
+  return <primitive object={car.model} dispose={null} />;
 }
-export const Wheel = forwardRef<Group, { x: number; z: number }>(function Wheel({ x, z }, ref) {
-  const { scene } = useGLTF(URL, DECODER);
-  const model = useMemo(
-    () => prepareCar(scene).wheels[(z > 0 ? 0 : 2) + (x > 0 ? 1 : 0)]!.clone(true),
-    [scene, x, z],
-  );
-  return (
-    <group ref={ref} position={[x, -0.42, z]}>
-      <group>
-        <primitive object={model} dispose={null} />
-      </group>
-    </group>
-  );
-});

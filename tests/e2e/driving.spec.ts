@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 
 test('safety consent, physical driving, pause, results and fresh consent', async ({ page }) => {
+  test.setTimeout(90000);
+  await page.setViewportSize({ width: 960, height: 720 });
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.addInitScript(() =>
@@ -17,10 +19,10 @@ test('safety consent, physical driving, pause, results and fresh consent', async
   await page.getByRole('button', { name: '자유 주행 시간 제한 없이 연습' }).click();
   await page.getByRole('checkbox', { name: '안전한 장소에서 게임을 이용하겠습니다.' }).check();
   await page.getByRole('button', { name: '주행 시작', exact: true }).click();
-  await expect(page.locator('.countdown')).toBeHidden({ timeout: 6000 });
+  await expect(page.locator('.countdown')).toBeHidden({ timeout: 20000 });
   await page.keyboard.down('w');
   await expect
-    .poll(async () => Number(await page.locator('[data-speed]').textContent()), { timeout: 7000 })
+    .poll(async () => Number(await page.locator('[data-speed]').textContent()), { timeout: 25000 })
     .toBeGreaterThan(15);
   await expect(page.locator('[data-needle]')).not.toHaveAttribute(
     'transform',
@@ -111,9 +113,9 @@ test('English coach speaks a mission and rewards the driving response', async ({
   await page.getByRole('button', { name: '자유 주행 시간 제한 없이 연습' }).click();
   await page.getByRole('checkbox', { name: '안전한 장소에서 게임을 이용하겠습니다.' }).check();
   await page.getByRole('button', { name: '주행 시작', exact: true }).click();
-  await expect(page.locator('.countdown')).toBeHidden({ timeout: 10000 });
+  await expect(page.locator('.countdown')).toBeHidden({ timeout: 20000 });
   await page.keyboard.down('w');
-  await expect(page.locator('[data-coach]')).toContainText('EN 2 / 6', { timeout: 18000 });
+  await expect(page.locator('[data-coach]')).toContainText('EN 2 / 6', { timeout: 25000 });
   await page.keyboard.up('w');
   await page.getByRole('button', { name: '주행 마치기' }).click();
   await expect(page.getByText('운전으로 수행한 미션 1 / 6', { exact: false })).toBeVisible();

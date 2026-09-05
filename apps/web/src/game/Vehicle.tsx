@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
 import {
   CuboidCollider,
   RigidBody,
@@ -23,12 +22,11 @@ import { vehicleSchema } from '@drivetalk/schema';
 import configJson from '../../../../config/vehicles/sprint.json';
 import { input, telemetry, useGame } from '../state/game-store';
 import { sampleInput } from '../input/controls';
-import { CarModel, Wheel } from './CarModel';
+import { CarModel } from './CarModel';
 import {
   createVehicleController,
   driveVehicle,
   tuneSuspension,
-  WHEEL_CONNECTIONS,
   type DriveState,
 } from './vehicle-controller';
 import { FollowCamera } from './FollowCamera';
@@ -39,7 +37,6 @@ const start = trackPoint(0);
 export function Vehicle(): React.JSX.Element {
   const body = useRef<RapierRigidBody>(null);
   const visual = useRef<Group>(null);
-  const wheels = useRef<(Group | null)[]>([]);
   const controller = useRef<DynamicRayCastVehicleController | null>(null);
   const { world } = useRapier();
   const color = useGame((s) => s.preferences.color);
@@ -154,19 +151,6 @@ export function Vehicle(): React.JSX.Element {
     if (telemetry.race.complete) telemetry.finishRequested = true;
   });
 
-  useFrame(() => {
-    const car = controller.current;
-    if (!car) return;
-    for (let i = 0; i < 4; i++) {
-      const wheel = wheels.current[i];
-      if (!wheel) continue;
-      wheel.position.y = -(car.wheelSuspensionLength(i) ?? vehicleConfig.suspensionRest);
-      wheel.rotation.y = car.wheelSteering(i) ?? 0;
-      const rolling = wheel.children[0];
-      if (rolling) rolling.rotation.x = car.wheelRotation(i) ?? 0;
-    }
-  });
-
   return (
     <>
       <RigidBody
@@ -196,17 +180,7 @@ export function Vehicle(): React.JSX.Element {
           restitution={0.04}
         />
         <group ref={visual}>
-          <CarModel color={color} />
-          {WHEEL_CONNECTIONS.map((p, i) => (
-            <Wheel
-              key={i}
-              ref={(el) => {
-                wheels.current[i] = el;
-              }}
-              x={p.x}
-              z={p.z}
-            />
-          ))}
+          <CarModel color={color} controller={controller} />
         </group>
       </RigidBody>
       <FollowCamera target={visual} />
